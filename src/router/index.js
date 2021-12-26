@@ -4,9 +4,13 @@ import Index from '../views/Index.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import AppIndex from '../views/AppIndex.vue'
+import Details from '../views/Details.vue'
+import Cart from '../views/Cart.vue'
+import ShoppingCart from '../components/cart/shoppingCart.vue'
 
 
-import Test from '../views/Test.vue'
+import UnLogin from '../components/cart/unLogin.vue'
+import Test from '../components/cart/shoppingCart.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +28,21 @@ const routes = [
         path:'/index',
         name:'AppIndex',
         component:AppIndex
+      },
+      {
+        path:'/cart',
+        name:'cart',
+        component:Cart,
+        children:[
+          {
+            path:'/cart',
+            component:ShoppingCart
+          },
+          {path:'/cart/unLogin',
+          component:UnLogin,
+        }
+        ]
+
       }
     ]
   },
@@ -36,6 +55,11 @@ const routes = [
     path:'/register',
     name:'register',
     component:Register
+  },
+  {
+    path:'/details',
+    name:'details',
+    component:Details
   },
   {
     path:'/test',

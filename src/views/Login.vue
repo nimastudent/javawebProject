@@ -42,8 +42,8 @@
 </template>
 
 <script>
-//   import qs from "qs"
-// import axios from "axios"
+  import qs from "qs"
+import axios from "axios"
   export default {
     name: "index",
     data(){
@@ -56,49 +56,50 @@
     },
     methods:{
       goBack() {
-        this.$router.push({
-          name: 'sindex'
-        })
+        this.$router.go(-1)
       },
       gotoRegister(){
         this.$router.push({
           name: 'register'
         })
       },
-      login () {
-        this.$axios.post('http://47.97.207.96:8081/login',JSON.stringify({
-          username: this.loginForm.username,
-          password:this.loginForm.password
-        }),{
-          headers: {
-            "Content-Type": "application/json",
-          }
+      async login () {
+        // this.$store.dispatch('login',this.loginForm)
+        const {data:res} = await axios.post('http://47.97.207.96:8081/login',qs.stringify(this.loginForm),{
+          withCredentials:true
         })
+        
+        // if(res.success){
+        //   this.$message.success('登陆成功')
+        //   window.sessionStorage.setItem('username',res.body.username)
+        //   this.$store.commit('LOGIN',res.body.username)
+        //   this.$router.push('index')
+        // }
 
-          .then((successResponse)=>{                    //请求成功后执行函数
-            if(successResponse.data.code === 200){
-              this.$router.replace('/index')	//登录验证成功路由实现跳转
-              this.$notify({
-                title: '提示',
-                message: '用户登录成功',
-                duration: 3000
-              });
-            }else{
-              this.$notify({
-                title: '提示',
-                message: '用户登录失败',
-                duration: 3000
-              });
-            }
-          })
-          .catch(err=>{                   //请求错误后执行函数
-            this.$notify({
-              title: '提示',
-              message: '用户访问错误',
-              duration: 3000
-            });
-            console.log(err)
-          })
+          // .then((successResponse)=>{                    //请求成功后执行函数
+          //   if(successResponse.data.code === 200){
+          //     this.$router.replace('/index')	//登录验证成功路由实现跳转
+          //     this.$notify({
+          //       title: '提示',
+          //       message: '用户登录成功',
+          //       duration: 3000
+          //     });
+          //   }else{
+          //     this.$notify({
+          //       title: '提示',
+          //       message: '用户登录失败',
+          //       duration: 3000
+          //     });
+          //   }
+          // })
+          // .catch(err=>{                   //请求错误后执行函数
+          //   this.$notify({
+          //     title: '提示',
+          //     message: '用户访问错误',
+          //     duration: 3000
+          //   });
+          //   console.log(err)
+          // })
       }
     }
   }

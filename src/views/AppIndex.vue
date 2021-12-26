@@ -19,7 +19,7 @@
           <SideMenu @indexSelect="listByCategory" class="sm" ref="sideMenu" ></SideMenu>
         </div>
         <div>
-           <Goods  class="goods-area" ref="goodsArea"></Goods>
+           <Goods class="goods-area" ref="goodsArea"></Goods>
         </div>
         
    
@@ -61,6 +61,9 @@ export default{
             _this.$refs.goodsArea.currentPage = 1
           }
         })
+      },
+      goDetails(){
+
       }
     }
 }

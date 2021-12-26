@@ -16,6 +16,15 @@ export default {
     name(){
       return this.$store.state.vuex_username
     }
+  },
+  mounted(){
+    this.test()
+  },
+  methods:{
+    test(){
+      var res = JSON.parse(window.sessionStorage.getItem('goodsDetails'))
+      console.log(res)
+    }
   }
 }
 </script>

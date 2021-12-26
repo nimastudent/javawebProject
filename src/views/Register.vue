@@ -285,9 +285,8 @@
         // })
       },
       goBack() {
-        this.$router.push({
-          name: 'sindex'
-        })
+                this.$router.push('/index');
+
       },
       gotoLogin(){
         this.$router.push('/login');

@@ -38,16 +38,14 @@ import axios from 'axios'
             method:'get',
             url:'http://47.97.207.96:8081/login/index'
           })
-          console.log(res);
           if(res.success){
             this.sidemenu = res.body
           }
         },
         handleSelect (key, keyPath) {
           this.index = key
-          // console.log(keyPath)
-          // this.typename=key,
-          // this.$emit('Goods')
+          this.$store.dispatch('getGoods',keyPath)
+        
         }
       }
     }

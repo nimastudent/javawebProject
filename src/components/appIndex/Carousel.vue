@@ -38,7 +38,7 @@
 
   .card-carousel {
     /*margin: 0 auto;*/
-    margin-left: 20px;
+    /* margin-left: 20px; */
     width: 750px;
     height: 350px;
     margin-right: auto;

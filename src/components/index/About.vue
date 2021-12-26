@@ -28,20 +28,20 @@
   }
 
   body {
-    font-size: 12px;
+    font-size: 1rem;
   }
 
   div {
-    font-size: 12px;
+    font-size: 1rem;
   }
 
   span {
-    font-size: 12px;
+    font-size: 1rem;
   }
 
   .footer {
     background: #585f6b;
-    width: 1200px;
+    width: 100vw;
     height: 80px;
     margin: auto;
   }
