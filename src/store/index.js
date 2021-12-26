@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
-import qs from 'qs'
 
 Vue.use(Vuex)
 
@@ -33,7 +32,6 @@ const actions = {
             method: 'get',
             url: 'http://47.97.207.96:8081/login/index/goods?typename=' + typename,
         })
-        // console.log(res);
         if (res.success) {
             state.commit('GETGOODS', res)
         }
@@ -46,22 +44,16 @@ const actions = {
         console.log(res)
         if (res.success) {
             state.commit('GETGOODSDETAILS', res)
-            // this.
-
         }
     },
     async addToCarts(state, params) {
         
+        console.log(params)
         const { data: res } = await axios({
             method: 'get',
-            url: 'http://47.97.207.96:8081/goods/insert?gid=1&count=1&standard=L',
-            headers:{
-                'Content-Type':'application/x-www-form-urlencoded',
-                'X-Requested-With':'XMLHttpRequest',
-            },
+            url: 'http://47.97.207.96:8081/goods/insert?gid='+params.id+'&count='+params.count+'&standard='+params.standard,
             withCredentials:true
         })
-        console.log(res);
 
     },
     async getcarts(state){
@@ -70,9 +62,20 @@ const actions = {
             url:'http://47.97.207.96:8081/goods/carts'
         })
         if(res.success){
-            
+            res.body.forEach(item => {
+                
+            });
 
             state.commit('GETCARTS',res.body)
+        }
+    },
+    async deleteCartsShopping(state,id){
+       const {data:res} = await axios({
+            method:'get',
+            url:'http://47.97.207.96:8081/goods/carts/delete?gid='+id
+        })
+        if(res.success){
+            console.log(res)
         }
     }
 }
@@ -87,7 +90,7 @@ const mutations = {
     },
     LOGIN(state, username) {
         state.vuex_username = username
-        state.vuex_cartsStep = 2
+        // state.vuex_cartsStep = 2
 
     },
     GETCARTS(state,res){

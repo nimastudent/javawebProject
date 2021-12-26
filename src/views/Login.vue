@@ -64,17 +64,20 @@ import axios from "axios"
         })
       },
       async login () {
-        // this.$store.dispatch('login',this.loginForm)
         const {data:res} = await axios.post('http://47.97.207.96:8081/login',qs.stringify(this.loginForm),{
           withCredentials:true
         })
+
+
+        // this.$store.dispatch('login',this.loginForm)
+
         
-        // if(res.success){
-        //   this.$message.success('登陆成功')
-        //   window.sessionStorage.setItem('username',res.body.username)
-        //   this.$store.commit('LOGIN',res.body.username)
-        //   this.$router.push('index')
-        // }
+        if(res.success){
+          this.$message.success('登陆成功')
+          window.sessionStorage.setItem('username',res.body.username)
+          this.$store.commit('LOGIN',res.body.username)
+          this.$router.push('index')
+        }
 
           // .then((successResponse)=>{                    //请求成功后执行函数
           //   if(successResponse.data.code === 200){

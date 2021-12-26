@@ -1,8 +1,11 @@
 .<template>
   <div class="content1" id="content1">
+
     <div class="con1">
-      <input type="checkbox" id="all" class="all" />
-      <p>全选</p>
+      <!-- <input type="checkbox" id="all" class="all" /> -->
+      <!-- <el-checkbox id="el-all" class="all" :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox> -->
+
+      <!-- <p v-show="false">全选</p> -->
       <p>商品</p>
       <p>单价</p>
       <p>数量</p>
@@ -10,18 +13,19 @@
       <p>操作</p>
     </div>
     <div class="con2">
-      <ul class="uls1">
-        <input type="checkbox" class="jingdong" />
-        <!-- <p class="uls1p2">京东自营</p> -->
-      </ul>
+      
       <ul class="uls1a">
         <p>满赠</p>
         <a href="#">活动商品满19，即可领取商品一件></a>
         <p>查看赠品</p>
         <a href="#">去凑单</a>
       </ul>
+
+
+  
       <ul class="uls2" id="box" v-for="item in carts" :key="item.name">
-        <input type="checkbox" class="all all1" />
+        <!-- <input type="checkbox" class="all all1" v-model="item.checked" @click="shopCecked(item)" /> -->
+
         <a href="#">
           <img :src="item.picture" alt="" />
           <p>
@@ -35,11 +39,13 @@
         <p class="xiaoji">
           <i id="xiaoji1">￥{{item.price*item.count}}</i>
         </p>
-        <p class="a666 b666">删除</p>
+        <p class="a666 b666" @click="deleteitem(item)">删除</p>
         <p class="a666">移到我的关注</p>
         <p class="a666">加到我的关注</p>
       </ul>
       
+
+
       <div class="uls4">
         <div class="uls4L">
           <input type="checkbox" class="all" />
@@ -56,7 +62,6 @@
                   总价：<span>￥</span><i>{{totalPrice}}</i>
                 </p>
               </div>
-              <!-- <p class="bbb">已节省：￥- 00.0</p> -->
             </div>
           </div>
           <div class="uls4b">
@@ -66,7 +71,7 @@
       </div>
     </div>
     <div class="fixed">
-      <p>京东商城</p>
+      <p>万物商城</p>
       <span>您确认删除吗？</span>
       <button class="sure">确认</button>
       <button class="quxiao">取消</button>
@@ -75,10 +80,16 @@
 </template>
 
 <script>
+
 export default {
   data(){
     return{
-      carts:[]
+      carts:[],
+      isIndeterminate:false,
+      checkAll:false,
+      checkedID:1,
+      checked:false,
+      uploadList:[]
     }
   },
   computed:{
@@ -99,13 +110,25 @@ export default {
     }
   },
   async mounted(){
+    let username = window.sessionStorage.getItem('username')
+    if(username != null){
     await this.$store.dispatch('getcarts')
     let goods = window.sessionStorage.getItem('carts')
     // let carts = this.$store.state.vuex_carts
     // console.log(carts)
     this.carts = JSON.parse(goods)
+    }else{
+      this.$router.push('login')
+    }
   },
   methods:{
+    deleteitem(item){
+       this.$store.dispatch('deleteCartsShopping',item.gid)
+         
+    },
+    commit(id){
+
+    },
     count(params,item){
       
       if(params == 1){
@@ -117,6 +140,11 @@ export default {
           item.count--;
         }
       }
+    },
+    shopCecked(item){
+     
+      
+      console.log(item)
     }
   }
 };
@@ -152,6 +180,9 @@ figure {
 body {
   font-family: "微软雅黑", Arial;
 }
+#el-all{
+  margin-top: 10px;
+}
 ul,
 ol {
   list-style: none;
@@ -163,7 +194,6 @@ img {
   border: 0;
 }
 
-/* content1 */
 .content1 {
   width: 100%;
 }
@@ -172,6 +202,7 @@ img {
   height: 36px;
   margin: 0 auto;
   background: #f3f3f3;
+  display: flex;
 }
 .con1 input {
   float: left;
@@ -335,11 +366,7 @@ button {
   margin-left: 150px;
   margin-top: 19px;
 }
-.uls2 li {
-  margin-top: 19px;
-  margin-left: 66px;
-  margin-right: 37px;
-}
+
 .uls2 button {
   width: 20px;
   height: 21px;

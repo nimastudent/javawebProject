@@ -31,6 +31,7 @@
         v-model="keywords"
       >
       </el-input>
+      <div v-show="false">{{listen}}</div>
     </el-menu>
   </div>
 </template>
