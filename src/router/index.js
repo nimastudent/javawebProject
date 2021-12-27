@@ -8,6 +8,7 @@ import Details from '../views/Details.vue'
 import Cart from '../views/Cart.vue'
 import ShoppingCart from '../components/cart/shoppingCart.vue'
 import Dingdan from '../components/cart/subCart.vue'
+import End from '../components/cart/end.vue'
 
 
 import UnLogin from '../components/cart/unLogin.vue'
@@ -42,6 +43,10 @@ const routes = [
           {
             path:'/cart/dingdan',
             component:Dingdan
+          },
+          {
+            path:'/cart/end',
+            component:End
           },
           {path:'/cart/unLogin',
           component:UnLogin,

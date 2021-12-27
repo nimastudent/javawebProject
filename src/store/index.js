@@ -107,6 +107,12 @@ const mutations = {
     DINGDAN(state){
         state.vuex_cartsStep = 2
     },
+    CARTLAST(state){
+        state.vuex_cartsStep = 4
+    },
+    STEPONE(state){
+        state.vuex_cartsStep = 1
+    }
     
 }
 

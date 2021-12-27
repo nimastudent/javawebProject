@@ -1,5 +1,6 @@
 <template>
-  <div class="cart-continar">
+  <div v-loading="loading" element-loading-text="付款中"
+    element-loading-spinner="el-icon-loading" class="cart-continar">
     <span>填写并核对订单</span>
 
     <div class="">
@@ -13,39 +14,38 @@
         <div>收货人：XXX</div>&nbsp;&nbsp;&nbsp;&nbsp;电话：1234567890 -->
 
         <el-descriptions title="用户信息">
-          <el-descriptions-item label="姓名">啥都不会</el-descriptions-item>
+          <el-descriptions-item label="姓名">{{form.name}}</el-descriptions-item>
           <el-descriptions-item label="手机号"
-            >18100000000</el-descriptions-item
+            >{{form.phoneNum}}</el-descriptions-item
           >
-          <el-descriptions-item label="居住地">苏州市</el-descriptions-item>
           <el-descriptions-item label="备注">
-            <el-tag size="small">学校</el-tag>
+            <el-tag size="small">{{form.tags}}</el-tag>
           </el-descriptions-item>
           <el-descriptions-item label="联系地址"
-            >江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item
+            >{{form.address}}</el-descriptions-item
           >
 
         </el-descriptions>
 
-        <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+        <el-dialog title="收货信息" :visible.sync="dialogFormVisible">
           <el-form :model="form">
             <el-form-item label="姓名" :label-width="formLabelWidth">
-              <el-input v-model="form.name" autocomplete="off"></el-input>
+              <el-input v-model="carForm.name" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="电话号码" :label-width="formLabelWidth">
-              <el-input v-model="form.name" autocomplete="off"></el-input>
+              <el-input v-model="carForm.phoneNum" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="收货地址" :label-width="formLabelWidth">
-              <el-input v-model="form.name" autocomplete="off"></el-input>
+              <el-input v-model="carForm.address" autocomplete="off"></el-input>
             </el-form-item>
            <el-form-item label="备注" :label-width="formLabelWidth">
-              <el-input v-model="form.name" autocomplete="off"></el-input>
+              <el-input v-model="carForm.tags" autocomplete="off"></el-input>
             </el-form-item>
           </el-form>
 
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogFormVisible = false"
+            <el-button type="primary" @click="confirm"
               >确 定</el-button
             >
           </div>
@@ -53,7 +53,7 @@
       </div>
 
       <div class="test-continar">
-        <div style="display: flex; font-size: 1rem">商品信息</div>
+        <div style="display: flex; font-size: 1rem; font-weight:700;">商品信息</div>
 
         <ul class="uls2" id="box" v-for="item in carts" :key="item.name">
           <a href="#">
@@ -87,15 +87,18 @@ export default {
     return {
       dialogFormVisible:false,
        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          name: '愿世界没有bug',
+          phoneNum:'18100000000',
+          address:'福建省龙岩市新罗区东肖路 1 号',
+          tags:'学校'
         },
+        carForm:{
+          name: '',
+          phoneNum:'',
+          address:'',
+          tags:''
+        },
+        loading:false,
         formLabelWidth: '120px'
     };
   },
@@ -116,9 +119,22 @@ export default {
     },
   },
   methods: {
-    fukuan() {
-      this.$store.dispatch("updateCarts");
+   async fukuan() {
+      // this.$store.dispatch("updateCarts");
+        this.loading = true
+
+      await window.setTimeout(()=>{
+      this.$router.push('/cart/end')
+
+      },3000)
+
+      
+
     },
+    confirm(){
+      this.dialogFormVisible = false
+      this.form = this.carForm
+    }
   },
 };
 </script>

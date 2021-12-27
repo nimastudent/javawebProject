@@ -2,12 +2,12 @@
   <div class="footer">
     <div style="border-top:1px #1F1F1F solid;">
       <p class="alt" style="color:#999; line-height:0">&copy; 版权所有： &nbsp;
-         <a href="" target="_blank" style="color:#999;">啥都不会队</a>
+         <a href="" target="_blank" style="color:#999;">愿世界没有bug队</a>
         
       </p>
       <div  style="color:#999; line-height:0;margin-top:10px">
         <span>技术支持：</span>
-        <a href="" target="_blank" style="color:#999;">啥都不会队</a>
+        <a href="" target="_blank" style="color:#999;">愿世界没有bug队</a>
       </div>
     </div>
   </div>

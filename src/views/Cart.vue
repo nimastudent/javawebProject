@@ -38,7 +38,6 @@ export default {
     }
   },
   mounted(){
-    var step = this.$store.state.vuex_cartsStep
   }
 };
 </script>

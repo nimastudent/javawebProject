@@ -2,10 +2,7 @@
   <div class="content1" id="content1">
 
     <div class="con1">
-      <!-- <input type="checkbox" id="all" class="all" /> -->
-      <!-- <el-checkbox id="el-all" class="all" :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox> -->
-
-      <!-- <p v-show="false">全选</p> -->
+      
       <p>商品</p>
       <p>单价</p>
       <p></p>
@@ -108,6 +105,7 @@ export default {
     let username = window.sessionStorage.getItem('username')
     if(username != null){
     await this.$store.dispatch('getcarts')
+    this.$store.commit('STEPONE')
     let goods = window.sessionStorage.getItem('carts')
     this.carts = JSON.parse(goods)
     }else{
@@ -125,7 +123,7 @@ export default {
     deleteitem(item){
 
 
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+      this.$confirm('确认删除该商品？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
