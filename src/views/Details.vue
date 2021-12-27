@@ -41,7 +41,7 @@
         </div>
         <div class="store">&nbsp;&nbsp;&nbsp;万物商城自营</div>
         <div :src="details.price" class="price">
-          &nbsp;&nbsp;&nbsp;价格： ￥ {{ details.price }}
+          &nbsp;价格：￥ {{ details.price }}
         </div>
 
         <div class="pro-list">
@@ -51,10 +51,6 @@
             
           </div>
 
-
-          <span :src="details.price" class="pro-price"
-            >{{ details.price }}元</span
-          >
 
           <div class="pn">
             <div style="font-size:20px;margin-top：16px">数量：</div>
@@ -283,12 +279,13 @@ export default {
   background: rgb(255, 249, 245);
 }
 #details .main .content .price {
-  display: block;
+  display: inline;
   font-size: 22px;
   color: #ff6700;
   border-bottom: 1px solid #e0e0e0;
+  margin-top: 20px;
   padding: 25px 0 25px;
-  text-align: left;
+  text-align: center;
   background: rgb(255, 249, 245);
 }
 #details .main .content .price .del {
