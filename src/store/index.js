@@ -77,6 +77,13 @@ const actions = {
         if(res.success){
             console.log(res)
         }
+    },
+    async updateCarts(state,params){
+        
+
+        // if(res.success){
+        //     console.log(res)
+        // }
     }
 }
 
@@ -94,10 +101,13 @@ const mutations = {
 
     },
     GETCARTS(state,res){
-        console.log(res)
         window.sessionStorage.setItem('carts',JSON.stringify(res))
         state.vuex_carts = res
-    }
+    },
+    DINGDAN(state){
+        state.vuex_cartsStep = 2
+    },
+    
 }
 
 export default new Vuex.Store({

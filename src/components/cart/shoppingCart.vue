@@ -8,9 +8,9 @@
       <!-- <p v-show="false">全选</p> -->
       <p>商品</p>
       <p>单价</p>
+      <p></p>
       <p>数量</p>
-      <p>小计</p>
-      <p>操作</p>
+      <p>金额</p>
     </div>
     <div class="con2">
       
@@ -65,17 +65,12 @@
             </div>
           </div>
           <div class="uls4b">
-            <a href="gouwu.html" rel="external nofollow">去结算</a>
+            <a @click="gonext" rel="external nofollow">去结算</a>
           </div>
         </div>
       </div>
     </div>
-    <div class="fixed">
-      <p>万物商城</p>
-      <span>您确认删除吗？</span>
-      <button class="sure">确认</button>
-      <button class="quxiao">取消</button>
-    </div>
+   
   </div>
 </template>
 
@@ -114,17 +109,46 @@ export default {
     if(username != null){
     await this.$store.dispatch('getcarts')
     let goods = window.sessionStorage.getItem('carts')
-    // let carts = this.$store.state.vuex_carts
-    // console.log(carts)
     this.carts = JSON.parse(goods)
     }else{
       this.$router.push('login')
     }
   },
   methods:{
+    gonext(){
+      console.log(this.carts)
+    
+      
+      this.$store.commit('GETCARTS',this.carts)
+      this.$router.push('/cart/dingdan')
+    },
     deleteitem(item){
-       this.$store.dispatch('deleteCartsShopping',item.gid)
-         
+
+
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+
+
+          this.carts.forEach(element => {
+         if(item == element){
+           this.carts.splice(this.carts.indexOf(item),1)
+          console.log(item)
+         }
+       })
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
+             
     },
     commit(id){
 
@@ -141,11 +165,7 @@ export default {
         }
       }
     },
-    shopCecked(item){
-     
-      
-      console.log(item)
-    }
+    
   }
 };
 </script>
@@ -196,6 +216,7 @@ img {
 
 .content1 {
   width: 100%;
+  margin-top: 20px;
 }
 .con1 {
   width: 952px;

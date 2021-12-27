@@ -7,6 +7,7 @@ import AppIndex from '../views/AppIndex.vue'
 import Details from '../views/Details.vue'
 import Cart from '../views/Cart.vue'
 import ShoppingCart from '../components/cart/shoppingCart.vue'
+import Dingdan from '../components/cart/subCart.vue'
 
 
 import UnLogin from '../components/cart/unLogin.vue'
@@ -37,6 +38,10 @@ const routes = [
           {
             path:'/cart',
             component:ShoppingCart
+          },
+          {
+            path:'/cart/dingdan',
+            component:Dingdan
           },
           {path:'/cart/unLogin',
           component:UnLogin,

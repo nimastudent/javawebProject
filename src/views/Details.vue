@@ -3,7 +3,8 @@
     <!-- 头部 -->
     <div class="page-header">
       <div class="title">
-        <button @click="goback">返回</button>
+        <el-button style="height:64px" icon="el-icon-back"  @click="goback"></el-button>
+        
         <div :src="details.name" class="title_name">万物商城</div>
         <div class="list">
           <ul>
@@ -88,7 +89,6 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
 import About from "../components/index/About.vue";
 
 export default {
@@ -96,8 +96,7 @@ export default {
   components: { About },
   data() {
     return {
-      //   details:{},
-      //   dis: true, // 控制“加入购物车按钮是否可用”
+   
       id: "", // 商品id
       num: 1,
       //   details: "", // 商品详细信息
@@ -133,8 +132,6 @@ export default {
     console.log(this.details);
   },
   methods: {
-    ...mapActions(["unshiftShoppingCart", "addShoppingCartNum"]),
-    // 获取商品详细信息
     goback(){
       this.$router.go(-1)
     },
@@ -165,8 +162,27 @@ export default {
         standard:this.standard
       };
      await this.$store.dispatch("addToCarts",params);
-     this.$message.success('添加成功')
+     
+       this.$confirm('商品已添加至购物车, 是否前往购物车?', '', {
+          confirmButtonText: '确定',
+          cancelButtonText: '我再看看',
+          type: 'info'
+        }).then(() => {
+          // this.$route.push('cart')
+          // console.log(this)
+          this.gocart()
+          this.$message({
+            type: 'success',
+            message: '跳转成功!'
+          });
+        }).catch(() => {
+                    
+        });
+      
     },
+    gocart(){
+      this.$router.push('/cart')
+    }
   },
 };
 </script>
@@ -181,7 +197,6 @@ export default {
 
 #details .page-header {
   height: 9%;
-  /* margin-top: 20px; */
   z-index: 4;
   background: #fff;
   border-bottom: 1px solid #e0e0e0;
